@@ -27,4 +27,14 @@ alunosRouter.get('/', (req: Request, res: Response) => {
     res.status(201).json(aluno);
   })
 
+  alunosRouter.get('/:matricula', (req: Request, res: Response) => {
+    const { matricula } = req.params;
+    const aluno = alunos.find(aluno => aluno.matricula === matricula);
+    if(aluno){
+        res.json(aluno) 
+    } else {
+        res.status(404).json({ error: 'Aluno nao encontrado' });
+    }
+  })
+
   export { Aluno, alunosRouter }

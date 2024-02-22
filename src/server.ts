@@ -1,6 +1,5 @@
 import express from 'express'
 
-import { Router, Request, Response } from 'express';
 import { alunosRouter } from './alunos';
 
 const app = express();
