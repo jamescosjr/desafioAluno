@@ -1,4 +1,3 @@
-
 import express from 'express'
 
 import { Router, Request, Response } from 'express';
@@ -21,12 +20,21 @@ class Aluno{
     }
 }
 
-const aluno1 = new Aluno('James', 35, '12345')
+const alunos: Aluno[] = [];
 
 route.get('/', (req: Request, res: Response) => {
-    res.json(aluno1)
+    res.json(alunos)
+  })
+
+  route.post('/', (req: Request, res: Response) => {
+    const { nome, idade, matricula } = req.body;
+    const aluno = new Aluno(nome, idade, matricula);
+    alunos.push(aluno);
+    res.status(201).json(aluno);
   })
 
   app.use(route)
 
-app.listen(3333, () => 'server running on port 3333')
+app.listen(3333, () => {
+    console.log('server running on port 3333');
+})
