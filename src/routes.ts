@@ -20,7 +20,7 @@ router.get('/alunos', (req, res) => {
     try{
         const aluno = AlunoService.insert(req.body);
         res.status(201).json(aluno);
-    } catch (error){
+    } catch (error: any){
         res.status(400).json({ error: error.message });
     }
   });
