@@ -1,17 +1,20 @@
-import Aluno from "./aluno";
+import AlunoModel, { IAluno } from './repository/alunoModel';
 
-const alunos: Aluno[] = [];
-
-const AlunoService = {
-    getAll: (): Aluno[] => alunos,
-    getByMatricula: (matricula: string): Aluno | undefined => alunos.find(aluno => aluno.matricula === matricula),
-    insert: (aluno: Aluno): Aluno => {
-        if (alunos.some(a => a.matricula === aluno.matricula)){
-            throw new Error('Já existe um aluno com esta matrícula.');
-        }
-        alunos.push(aluno);
-        return aluno;
+export const AlunoService = {
+  getAll: async (): Promise<IAluno[]> => {
+    return await AlunoModel.find();
+  },
+  getByMatricula: async (matricula: string): Promise<IAluno | null> => {
+    return await AlunoModel.findOne({ matricula });
+  },
+  insert: async (alunoData: IAluno): Promise<IAluno> => {
+    const aluno = new AlunoModel(alunoData);
+    try {
+      await aluno.save();
+      return aluno;
+    } catch (error: any) {
+        console.log(error.message)
+      throw new Error('Erro ao inserir aluno no banco de dados.');
     }
-}
-
-export default AlunoService;
+  },
+};

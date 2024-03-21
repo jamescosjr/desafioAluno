@@ -1,12 +1,12 @@
-class Aluno{
-    nome: string
-    idade: number
-    matricula: string
+class Aluno {
+    nome: string;
+    idade: number;
+    matricula: string;
 
-    constructor(n: string, i: number, m: string){
-        this.nome = n
-        this.idade = i
-        this.matricula = m
+    constructor(nome: string, idade: number, matricula: string) {
+        this.nome = nome;
+        this.idade = idade;
+        this.matricula = matricula;
     }
 }
 
