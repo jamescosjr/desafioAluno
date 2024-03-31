@@ -1,4 +1,5 @@
 import mongoose, { Document, Schema } from 'mongoose';
+import dotenv from 'dotenv';
 
 export interface IAluno extends Document {
   nome: string;

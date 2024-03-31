@@ -17,4 +17,12 @@ export const AlunoService = {
       throw new Error('Erro ao inserir aluno no banco de dados.');
     }
   },
+  update: async (matricula: string, alunoData: Partial<IAluno>): Promise<IAluno | null> => {
+    const aluno = await AlunoModel.findOneAndUpdate({ matricula }, alunoData, { new: true });
+    return aluno;
+  },
+  delete: async (matricula: string): Promise<IAluno | null> => {
+    const aluno = await AlunoModel.findOneAndDelete({ matricula });
+    return aluno;
+  },
 };
